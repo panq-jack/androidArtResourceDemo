@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.chapter2">
+
+
+    <!--远程service的权限-->
+    <permission
+        android:name="com.example.chapter2.permission.ACCESS_BOOK_SERVICE"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.example.chapter2.permission.ACCESS_BOOK_SERVICE"/>
+
+
+    <permission
+        android:name="com.example.chapter2.PROVIDER"
+        android:protectionLevel="normal" />
+
+    <!--<uses-permission android:name="com.example.chapter2.PROVIDER"/>-->
+
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="standard" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SecondActivity"
+            android:configChanges="screenLayout"
+            android:label="@string/app_name"
+            android:process=":remote" />
+
+
+        <activity
+            android:name=".ThirdActivity"
+            android:configChanges="screenLayout"
+            android:label="@string/app_name"
+            android:process="com.example.chapter2.remote" />
+
+
+
+
+        <activity android:name=".aidl.BookManagerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+
+        <service android:name=".aidl.BookManagerService"
+            android:process=":remote"/>
+
+
+        <activity
+            android:name=".messenger.MessengerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".messenger.MessengerService"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.example.chapter2.MessengerService.launch" />
+            </intent-filter>
+        </service>
+
+
+        <activity
+            android:name=".provider.ProviderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".provider.BookProvider"
+            android:authorities="com.example.chapter2.provider"
+            android:permission="com.example.chapter2.PROVIDER"
+            android:process=":provider" >
+        </provider>
+
+
+
+
+
+        <activity
+            android:name=".socket.TCPClientActivity"
+
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".socket.TCPServerService"
+            android:process=":remote" />
+
+
+
+
+
+
+        <activity
+            android:name=".binderpool.BinderPoolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".binderpool.BinderPoolService"
+            android:process=":remote" />
+    </application>
+
+</manifest>
