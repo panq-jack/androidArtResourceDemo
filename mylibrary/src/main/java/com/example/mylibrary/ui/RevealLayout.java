@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.mylibrary.R;
+
 import java.util.ArrayList;
 
 /**
@@ -61,8 +63,8 @@ public class RevealLayout extends LinearLayout implements Runnable {
 
     private void init() {
         setWillNotDraw(false);
-        mPaint.setColor(Color.BLUE);
-//        mPaint.setColor(getResources().getColor(R.color.reveal_color));
+//        mPaint.setColor(Color.BLUE);
+        mPaint.setColor(getResources().getColor(R.color.reveal_color));
     }
 
     @Override

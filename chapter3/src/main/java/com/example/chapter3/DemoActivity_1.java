@@ -37,7 +37,7 @@ public class DemoActivity_1 extends Activity {
         mListContainer = (HorizontalScrollViewEx) findViewById(R.id.container);
         final int screenWidth = MyUtils.getScreenMetrics(this).widthPixels;
         final int screenHeight = MyUtils.getScreenMetrics(this).heightPixels;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             ViewGroup layout = (ViewGroup) inflater.inflate(
                     R.layout.content_layout, mListContainer, false);
             layout.getLayoutParams().width = screenWidth;
@@ -63,9 +63,8 @@ public class DemoActivity_1 extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                Toast.makeText(DemoActivity_1.this, "click item",
+                Toast.makeText(DemoActivity_1.this, "click item:  "+position,
                         Toast.LENGTH_SHORT).show();
-
             }
         });
     }

@@ -16,6 +16,10 @@ public class TestButton extends TextView {
     private int mLastX = 0;
     private int mLastY = 0;
 
+
+    private int mInitialX=0;
+    private int mInitialY = 0;
+
     public TestButton(Context context) {
         this(context, null);
     }
@@ -34,6 +38,37 @@ public class TestButton extends TextView {
         mScaledTouchSlop = ViewConfiguration.get(getContext())
                 .getScaledTouchSlop();
         Log.d(TAG, "sts:" + mScaledTouchSlop);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mInitialX = (int)getX();
+        mInitialY = (int)getY();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(getDesiredMeasureSpec(widthMeasureSpec),
+                getDesiredMeasureSpec(heightMeasureSpec));
+    }
+
+    private int getDesiredMeasureSpec(int measureSpec){
+        int measureMode = MeasureSpec.getMode(measureSpec);
+        int measureSize = MeasureSpec.getSize(measureSpec);
+
+        int result = 200;
+        if (measureMode == MeasureSpec.EXACTLY){
+            result = measureSize;
+        }else if (measureMode == MeasureSpec.AT_MOST){
+            result = Math.min(result , measureSize);
+
+        }else {
+
+        }
+        return MeasureSpec.makeMeasureSpec(result,measureMode);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -59,6 +94,10 @@ public class TestButton extends TextView {
             break;
         }
         case MotionEvent.ACTION_UP: {
+
+            setX(mInitialX);
+            setY(mInitialY);
+
             break;
         }
         default:

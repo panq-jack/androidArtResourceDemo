@@ -134,11 +134,13 @@ public class HorizontalScrollViewEx extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int measuredWidth = 0;
         int measuredHeight = 0;
         final int childCount = getChildCount();
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
+
+        //!!!!
+        measureChildren( widthMeasureSpec , heightMeasureSpec );
 
         int widthSpaceSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -149,7 +151,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
         } else if (heightSpecMode == MeasureSpec.AT_MOST) {
             final View childView = getChildAt(0);
             measuredHeight = childView.getMeasuredHeight();
-            setMeasuredDimension(widthSpaceSize, childView.getMeasuredHeight());
+            setMeasuredDimension(widthSpaceSize, measuredHeight);
         } else if (widthSpecMode == MeasureSpec.AT_MOST) {
             final View childView = getChildAt(0);
             measuredWidth = childView.getMeasuredWidth() * childCount;
@@ -193,8 +195,16 @@ public class HorizontalScrollViewEx extends ViewGroup {
         }
     }
 
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Log.d(TAG,"onAttachedToWindow");
+    }
+
     @Override
     protected void onDetachedFromWindow() {
+        Log.d(TAG,"onDetachedFromWindow");
         mVelocityTracker.recycle();
         super.onDetachedFromWindow();
     }

@@ -66,7 +66,7 @@ public class DemoActivity_2 extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                Toast.makeText(DemoActivity_2.this, "click item",
+                Toast.makeText(DemoActivity_2.this, "click item : "+position,
                         Toast.LENGTH_SHORT).show();
 
             }
